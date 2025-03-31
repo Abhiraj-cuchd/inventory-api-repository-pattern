@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ProductServiceInterface } from "../interfaces/product.service.interface";
 import { CreateProductDto, UpdateProductDto } from "../dtos/product.dto";
+import logger from "../../../config/logger";
 
 export class ProductController {
     private productService: ProductServiceInterface;
@@ -38,6 +39,7 @@ export class ProductController {
     }
 
     async createProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
+        logger.info('createProduct')
         try {
             const productData: CreateProductDto = req.body;
             const product = await this.productService.create(productData);

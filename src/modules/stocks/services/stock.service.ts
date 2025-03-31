@@ -27,6 +27,10 @@ export class StockService implements StockServiceInterface {
         return await this.stockRepository.create(stockData);
     }
 
+    async findByProductId(productId: string): Promise<IStock | null> {
+        return await this.stockRepository.findByProductId(productId);
+    }
+
     async update(id: string, stockData: UpdateStockDto): Promise<IStock | null> {
         if (stockData.productId) {
             const existingStock = await this.stockRepository.findByProductId(stockData.productId);

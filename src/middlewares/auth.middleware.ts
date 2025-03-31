@@ -41,6 +41,7 @@ export class AuthMiddleware {
                 if(!roles.includes(req.user.role)) {
                     throw new AppError('Unauthorized access', 403);
                 }
+                next();
             } catch (e: Error | any) {
                 next(e)
             }

@@ -5,10 +5,10 @@ import morgan from 'morgan';
 
 import { MongoDBConnection } from "./infrastructure/database/mongodb.connection";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
-
 import { AuthRouter } from "./modules/auth/routes/auth.route";
 import { ProductRouter } from "./modules/products/routes/product.route";
 import { StockRouter } from "./modules/stocks/routes/stock.route";
+import { InvoiceRouter } from './modules/invoices/routes/invoice.routes';
 import logger from "./config/logger";
 import HealthCheckRouter from "./config/healthcheck.router";
 
@@ -34,12 +34,14 @@ export class App {
         const authRoutes = new AuthRouter();
         const productRoutes = new ProductRouter();
         const stockRoutes = new StockRouter();
+        const invoiceRoutes = new InvoiceRouter();
         const healthCheckRoute = new HealthCheckRouter();
 
         this.app.use('/api/v1/health-check', healthCheckRoute.getRouter())
         this.app.use('/api/v1/auth', authRoutes.getRouter());
         this.app.use('/api/v1/products', productRoutes.getRouter());
         this.app.use('/api/v1/stocks', stockRoutes.getRouter());
+        this.app.use('/api/v1/invoices', invoiceRoutes.getRouter());
     }
 
     private configureErrorHandling(): void {
