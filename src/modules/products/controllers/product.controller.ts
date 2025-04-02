@@ -14,9 +14,7 @@ export class ProductController {
             const products = await this.productService.getAll();
             res.status(200).json({
                 status: 'success',
-                data: {
-                    products
-                }
+                products
             });
         } catch (error) {
             next(error);

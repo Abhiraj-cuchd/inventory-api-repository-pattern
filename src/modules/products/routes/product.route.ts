@@ -22,6 +22,7 @@ export class ProductRouter {
         this.router.get('/:id', this.productController.getProductById.bind(this.productController));
         this.router.post('/', AuthMiddleware.authenticate, AuthMiddleware.authorize(['admin']), this.productController.createProduct.bind(this.productController));
         this.router.put('/:id', AuthMiddleware.authenticate, AuthMiddleware.authorize(['admin']), this.productController.updateProduct.bind(this.productController));
+        this.router.delete('/:id', AuthMiddleware.authenticate, AuthMiddleware.authorize(['admin']), this.productController.deleteProduct.bind(this.productController));
     }
 
     public getRouter() : Router {
